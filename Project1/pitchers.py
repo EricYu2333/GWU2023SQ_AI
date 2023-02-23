@@ -46,11 +46,11 @@ class Pitchers:
         capacities.append(int(line)) #Concatenate into a list
         fo.close()
 
-        gcd = multi_gcd(capacities[:-1])
-        if capacities[-1] % gcd > 0:
+        gcd = multi_gcd(capacities[:-1]) #Get the gcd by function
+        if capacities[-1] % gcd > 0: #If not possible, have no path
             return -1, None
 
-        pitchnum = len(capacities)
+        pitchnum = len(capacities) #number of pitchers
         Node.capacities = capacities
 
         start_states = [0 for _ in range(pitchnum)] #Initialization, all are 0
