@@ -50,7 +50,7 @@ class Pitchers:
         if capacities[-1] % gcd > 0: #If not possible, have no path
             return -1, None
 
-        pitchnum = len(capacities) #number of pitchers
+        pitchnum = len(capacities) #Number of pitchers
         Node.capacities = capacities
 
         start_states = [0 for _ in range(pitchnum)] #Initialization, all are 0
@@ -66,13 +66,13 @@ class Pitchers:
             current_g = current_node.g
             current_path = current_node.path
 
-            # deque the answer, return
+            # Deque the answer, return
             if current_states[-1] == capacities[-1]:
                 return current_g, current_node
 
-            # pour any water pitcher into the infinite one
+            # Pour any water pitcher into the infinite one
             for i in range(pitchnum-1):
-                # if the new state is visited, just skip
+                # If the new state is visited, just skip
                 if current_states[-1] + capacities[i] in close_list:
                     continue
                 new_states = current_states[:]
@@ -83,16 +83,16 @@ class Pitchers:
                 else:
                     new_g = current_g + 2
                     
-                # calculate the new state related variables
+                # Compute new state-dependent variables
                 new_path.append(capacities[i])
                 new_states[-1] = current_states[-1] + capacities[i]
                 close_list.add(new_states[-1])
                 open_list.append(Node(new_states,new_g,new_path))
                 open_list.sort(key=lambda element:element.getF())
 
-            # pour the infinite one into any water pitcher
+            # Pour the infinite one into any water pitcher
             for i in range(pitchnum-1):
-                # if the new state is invalid or visited, just skip
+                # If the new state is invalid or visited, just skip
                 if current_states[-1] - capacities[i] < 0:
                     continue
                 if current_states[-1] - capacities[i] in close_list:
@@ -105,7 +105,7 @@ class Pitchers:
                 else:
                     new_states[i] = 1
                     new_g = current_g + 1
-                # calculate the new state related variables
+                # Compute new state-dependent variables
                 new_path.append(-capacities[i])
                 new_states[-1] = current_states[-1] - capacities[i]
                 close_list.add(new_states[-1])
