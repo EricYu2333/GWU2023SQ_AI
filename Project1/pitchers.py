@@ -70,7 +70,7 @@ class Pitchers:
             if current_states[-1] == capacities[-1]:
                 return current_g, current_node
 
-            # pour any water pitcher -> the infinite one
+            # pour any water pitcher into the infinite one
             for i in range(pitchnum-1):
                 # if the new state is visited, just skip
                 if current_states[-1] + capacities[i] in close_list:
@@ -90,7 +90,7 @@ class Pitchers:
                 open_list.append(Node(new_states,new_g,new_path))
                 open_list.sort(key=lambda element:element.getF())
 
-            # pour the infinite one -> any water pitcher
+            # pour the infinite one into any water pitcher
             for i in range(pitchnum-1):
                 # if the new state is invalid or visited, just skip
                 if current_states[-1] - capacities[i] < 0:
@@ -110,7 +110,7 @@ class Pitchers:
                 new_states[-1] = current_states[-1] - capacities[i]
                 close_list.add(new_states[-1])
                 open_list.append(Node(new_states,new_g,new_path))
-                open_list.sort(key=lambda element:element.getF())
+                open_list.sort(key=lambda element:element.getF()) #Sort by the f size of each node, the smaller the front processing
 
         return -1, None
 
